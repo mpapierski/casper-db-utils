@@ -41,8 +41,11 @@ pub fn load_execution_engine(
             lmdb_data_file.display()
         ));
     }
-    let lmdb_environment =
-        execution_engine::create_lmdb_environment(&ee_lmdb_path, default_max_db_size, manual_sync_enabled)?;
+    let lmdb_environment = execution_engine::create_lmdb_environment(
+        &ee_lmdb_path,
+        default_max_db_size,
+        manual_sync_enabled,
+    )?;
     let lmdb_trie_store = Arc::new(LmdbTrieStore::open(&lmdb_environment, None)?);
     let global_state = LmdbGlobalState::new(
         Arc::clone(&lmdb_environment),
@@ -69,8 +72,11 @@ pub fn create_execution_engine(
         fs::create_dir_all(&ee_lmdb_path)?;
     }
     fs::create_dir_all(&ee_lmdb_path)?;
-    let lmdb_environment =
-        crate::common::execution_engine::create_lmdb_environment(&ee_lmdb_path, default_max_db_size, manual_sync_enabled)?;
+    let lmdb_environment = crate::common::execution_engine::create_lmdb_environment(
+        &ee_lmdb_path,
+        default_max_db_size,
+        manual_sync_enabled,
+    )?;
     lmdb_environment.env().sync(true)?;
 
     let lmdb_trie_store = Arc::new(LmdbTrieStore::new(

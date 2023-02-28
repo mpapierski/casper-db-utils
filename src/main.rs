@@ -9,7 +9,7 @@ use std::{fs::OpenOptions, process};
 use clap::{crate_description, crate_version, Arg, Command};
 use log::error;
 
-use subcommands::{archive, check, latest_block_summary, trie_compact, unsparse, migrate};
+use subcommands::{archive, check, latest_block_summary, migrate, trie_compact, unsparse};
 
 const LOGGING: &str = "logging";
 
