@@ -18,6 +18,8 @@ use casper_node::{storage::Storage, StorageConfig, WithDir};
 use casper_types::ProtocolVersion;
 use lmdb::DatabaseFlags;
 
+use crate::common::execution_engine;
+
 use super::compact::TRIE_STORE_FILE_NAME;
 
 /// LMDB max readers
@@ -40,7 +42,7 @@ pub fn load_execution_engine(
         ));
     }
     let lmdb_environment =
-        create_lmdb_environment(&ee_lmdb_path, default_max_db_size, manual_sync_enabled)?;
+        execution_engine::create_lmdb_environment(&ee_lmdb_path, default_max_db_size, manual_sync_enabled)?;
     let lmdb_trie_store = Arc::new(LmdbTrieStore::open(&lmdb_environment, None)?);
     let global_state = LmdbGlobalState::new(
         Arc::clone(&lmdb_environment),
@@ -51,21 +53,6 @@ pub fn load_execution_engine(
         Arc::new(EngineState::new(global_state, EngineConfig::default())),
         lmdb_environment,
     ))
-}
-
-/// Create an lmdb environment at a given path.
-fn create_lmdb_environment(
-    lmdb_path: impl AsRef<Path>,
-    default_max_db_size: usize,
-    manual_sync_enabled: bool,
-) -> Result<Arc<LmdbEnvironment>, anyhow::Error> {
-    let lmdb_environment = Arc::new(LmdbEnvironment::new(
-        &lmdb_path,
-        default_max_db_size,
-        DEFAULT_MAX_READERS,
-        manual_sync_enabled,
-    )?);
-    Ok(lmdb_environment)
 }
 
 /// Creates a new execution engine.
@@ -83,7 +70,7 @@ pub fn create_execution_engine(
     }
     fs::create_dir_all(&ee_lmdb_path)?;
     let lmdb_environment =
-        create_lmdb_environment(&ee_lmdb_path, default_max_db_size, manual_sync_enabled)?;
+        crate::common::execution_engine::create_lmdb_environment(&ee_lmdb_path, default_max_db_size, manual_sync_enabled)?;
     lmdb_environment.env().sync(true)?;
 
     let lmdb_trie_store = Arc::new(LmdbTrieStore::new(

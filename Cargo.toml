@@ -13,10 +13,10 @@ license = "Apache-2.0"
 [dependencies]
 anyhow = "1"
 bincode = "1"
-casper-execution-engine = "2"
-casper-hashing = "1"
-casper-node = "1"
-casper-types = "1"
+casper-execution-engine = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat" }
+casper-hashing = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat" }
+casper-node = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat" }
+casper-types = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat" }
 clap = { version = "3", features = ["cargo"] }
 futures = "0.3.21"
 lmdb = "0.8.0"
