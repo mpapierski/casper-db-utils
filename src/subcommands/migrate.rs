@@ -1,10 +1,12 @@
-use std::sync::Arc;
+use std::{sync::Arc, time::Instant};
 
-use casper_execution_engine::storage::{trie_store::lmdb::LmdbTrieStore, global_state::lmdb::LmdbGlobalState};
+use casper_execution_engine::storage::{
+    global_state::lmdb::LmdbGlobalState, trie_store::lmdb::LmdbTrieStore,
+};
 use casper_hashing::Digest;
-use clap::{Command, Arg, ArgMatches};
+use clap::{Arg, ArgMatches, Command};
 
-use crate::common::execution_engine::{create_lmdb_environment};
+use crate::common::execution_engine::create_lmdb_environment;
 
 pub const COMMAND_NAME: &str = "migrate";
 const DB_PATH: &str = "file-path";
@@ -39,24 +41,46 @@ pub fn run(matches: &ArgMatches) -> bool {
     let db_path = matches.value_of(DB_PATH).unwrap();
     let state_root_hash = matches.value_of(STATE_ROOT_HASH).unwrap();
     let state_root_hash = Digest::from_hex(state_root_hash).unwrap();
-    let lmdb_environment =
-        create_lmdb_environment(&db_path, DEFAULT_MAX_DB_SIZE, true).expect("create lmdb environment");
+    let lmdb_environment = create_lmdb_environment(&db_path, DEFAULT_MAX_DB_SIZE, true)
+        .expect("create lmdb environment");
     let lmdb_trie_store = Arc::new(LmdbTrieStore::open(&lmdb_environment, None).unwrap());
 
-    let (empty_root_hash, _empty_trie) = casper_execution_engine::storage::global_state::lmdb::compute_empty_root_hash().unwrap();
-    let global_state = LmdbGlobalState::new(Arc::clone(&lmdb_environment), lmdb_trie_store, empty_root_hash);
+    let (empty_root_hash, _empty_trie) =
+        casper_execution_engine::storage::global_state::lmdb::compute_empty_root_hash().unwrap();
+    let global_state = LmdbGlobalState::new(
+        Arc::clone(&lmdb_environment),
+        lmdb_trie_store,
+        empty_root_hash,
+    );
 
-    let result = casper_execution_engine::core::engine_state::upgrade::migrations::purge_era_info(&global_state, state_root_hash);
+    let start = Instant::now();
+    let result = casper_execution_engine::core::engine_state::upgrade::migrations::purge_era_info(
+        &global_state,
+        state_root_hash,
+    );
+    let elapsed = start.elapsed();
+
     match result {
         Ok(migration_result) => {
             if migration_result.post_state_hash == state_root_hash {
                 println!("(!) No migration was performed.");
+            } else {
+                println!("Migration finished in {:?}", elapsed);
             }
             println!("Keys deleted: {}", migration_result.keys_to_delete.len());
-            println!("Firt deleted key: {:?}", migration_result.keys_to_delete.first());
-            println!("Last deleted key: {:?}", migration_result.keys_to_delete.last());
+            println!(
+                "Firt deleted key: {:?}",
+                migration_result.keys_to_delete.first()
+            );
+            println!(
+                "Last deleted key: {:?}",
+                migration_result.keys_to_delete.last()
+            );
             println!("Last era info: {:?}", migration_result.era_summary);
-            println!("State root hash after migration: {}", migration_result.post_state_hash);
+            println!(
+                "State root hash after migration: {}",
+                migration_result.post_state_hash
+            );
             true
         }
         Err(error) => {
@@ -77,5 +101,4 @@ pub fn run(matches: &ArgMatches) -> bool {
     // }
 
     // result.is_ok()
-
 }
