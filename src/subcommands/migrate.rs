@@ -35,12 +35,20 @@ pub fn command(display_order: usize) -> Command<'static> {
                 .required(true)
                 .help("State root hash of the tip of the trie."),
         )
+        .arg(
+            Arg::new("BATCH_SIZE")
+                .long("--batch-size")
+                .value_name("BATCH_SIZE")
+                .required(true)
+                .help("State root hash of the tip of the trie."),
+        )
 }
 
 pub fn run(matches: &ArgMatches) -> bool {
     let db_path = matches.value_of(DB_PATH).unwrap();
     let state_root_hash = matches.value_of(STATE_ROOT_HASH).unwrap();
     let state_root_hash = Digest::from_hex(state_root_hash).unwrap();
+    let batch_size:usize = matches.value_of("BATCH_SIZE").unwrap().parse().unwrap();
     let lmdb_environment = create_lmdb_environment(&db_path, DEFAULT_MAX_DB_SIZE, true)
         .expect("create lmdb environment");
     let lmdb_trie_store = Arc::new(LmdbTrieStore::open(&lmdb_environment, None).unwrap());
@@ -57,6 +65,7 @@ pub fn run(matches: &ArgMatches) -> bool {
     let result = casper_execution_engine::core::engine_state::upgrade::migrations::purge_era_info(
         &global_state,
         state_root_hash,
+        batch_size,
     );
     let elapsed = start.elapsed();
 
