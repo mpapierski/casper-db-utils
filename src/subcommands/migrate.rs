@@ -76,7 +76,7 @@ pub fn run(matches: &ArgMatches) -> bool {
                 "Last deleted key: {:?}",
                 migration_result.keys_to_delete.last()
             );
-            println!("Last era info: {:?}", migration_result.era_summary);
+            // println!("Last era info: {:?}", migration_result.era_summary);
             println!(
                 "State root hash after migration: {}",
                 migration_result.post_state_hash

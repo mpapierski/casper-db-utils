@@ -13,10 +13,10 @@ license = "Apache-2.0"
 [dependencies]
 anyhow = "1"
 bincode = "1"
-casper-execution-engine = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat-wip" }
-casper-hashing = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat-wip" }
-casper-node = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat-wip" }
-casper-types = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat-wip" }
+casper-execution-engine = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat-fast" }
+casper-hashing = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat-fast" }
+casper-node = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat-fast" }
+casper-types = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-fix-era-info-bloat-fast" }
 #casper-execution-engine = { path = "../casperlabs-node/execution_engine" }
 #casper-hashing =  { path = "../casperlabs-node/hashing" }
 #casper-node = { path = "../casperlabs-node/node" }
