@@ -91,9 +91,9 @@ dependencies = [
 
 [[package]]
 name = "async-trait"
-version = "0.1.65"
+version = "0.1.66"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "095183a3539c7c7649b2beb87c2d3f0591f3a7fed07761cc546d244e27e0238c"
+checksum = "b84f9ebcc6c1f5b8cb160f6990096a5c127f423fcb6e1ccc46c370cbdfb75dfc"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -316,7 +316,7 @@ dependencies = [
 [[package]]
 name = "casper-execution-engine"
 version = "3.0.0"
-source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#0d88b439bccf3b868628ac05bd8ba67465ba3699"
+source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#d4a9e05a756d0e2258722de53065c5ac2808fb35"
 dependencies = [
  "anyhow",
  "base16",
@@ -358,7 +358,7 @@ dependencies = [
 [[package]]
 name = "casper-hashing"
 version = "1.4.3"
-source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#0d88b439bccf3b868628ac05bd8ba67465ba3699"
+source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#d4a9e05a756d0e2258722de53065c5ac2808fb35"
 dependencies = [
  "base16",
  "blake2",
@@ -375,7 +375,7 @@ dependencies = [
 [[package]]
 name = "casper-node"
 version = "1.4.13"
-source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#0d88b439bccf3b868628ac05bd8ba67465ba3699"
+source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#d4a9e05a756d0e2258722de53065c5ac2808fb35"
 dependencies = [
  "ansi_term",
  "anyhow",
@@ -466,7 +466,7 @@ dependencies = [
 [[package]]
 name = "casper-node-macros"
 version = "1.4.3"
-source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#0d88b439bccf3b868628ac05bd8ba67465ba3699"
+source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#d4a9e05a756d0e2258722de53065c5ac2808fb35"
 dependencies = [
  "Inflector",
  "indexmap",
@@ -478,7 +478,7 @@ dependencies = [
 [[package]]
 name = "casper-types"
 version = "1.5.0"
-source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#0d88b439bccf3b868628ac05bd8ba67465ba3699"
+source = "git+https://github.com/mpapierski/casper-node?branch=gh-3710-fix-era-info-bloat-fast#d4a9e05a756d0e2258722de53065c5ac2808fb35"
 dependencies = [
  "base16",
  "base64 0.13.1",
@@ -769,9 +769,9 @@ dependencies = [
 
 [[package]]
 name = "cxx"
-version = "1.0.91"
+version = "1.0.92"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86d3488e7665a7a483b57e25bdd90d0aeb2bc7608c8d0346acf2ad3f1caf1d62"
+checksum = "9a140f260e6f3f79013b8bfc65e7ce630c9ab4388c6a89c71e07226f49487b72"
 dependencies = [
  "cc",
  "cxxbridge-flags",
@@ -781,9 +781,9 @@ dependencies = [
 
 [[package]]
 name = "cxx-build"
-version = "1.0.91"
+version = "1.0.92"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "48fcaf066a053a41a81dfb14d57d99738b767febb8b735c3016e469fac5da690"
+checksum = "da6383f459341ea689374bf0a42979739dc421874f112ff26f829b8040b8e613"
 dependencies = [
  "cc",
  "codespan-reporting",
@@ -796,15 +796,15 @@ dependencies = [
 
 [[package]]
 name = "cxxbridge-flags"
-version = "1.0.91"
+version = "1.0.92"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2ef98b8b717a829ca5603af80e1f9e2e48013ab227b68ef37872ef84ee479bf"
+checksum = "90201c1a650e95ccff1c8c0bb5a343213bdd317c6e600a93075bca2eff54ec97"
 
 [[package]]
 name = "cxxbridge-macro"
-version = "1.0.91"
+version = "1.0.92"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "086c685979a698443656e5cf7856c95c642295a38599f12fb1ff76fb28d19892"
+checksum = "0b75aed41bb2e6367cae39e6326ef817a851db13c13e4f3263714ca3cfb8de56"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2107,9 +2107,9 @@ dependencies = [
 
 [[package]]
 name = "paste"
-version = "1.0.11"
+version = "1.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d01a5bd0424d00070b0098dd17ebca6f961a959dead1dbcbbbc1d1cd8d3deeba"
+checksum = "9f746c4065a8fa3fe23974dd82f15431cc8d40779821001404d10d2e79ca7d79"
 
 [[package]]
 name = "paste-impl"
@@ -2499,7 +2499,7 @@ checksum = "44519172358fd6d58656c86ab8e7fbc9e1490c3e8f14d35ed78ca0dd07403c9f"
 dependencies = [
  "byteorder",
  "num-traits",
- "paste 1.0.11",
+ "paste 1.0.12",
 ]
 
 [[package]]
@@ -2623,9 +2623,9 @@ checksum = "d29ab0c6d3fc0ee92fe66e2d99f700eab17a8d57d1c1d3b748380fb20baa78cd"
 
 [[package]]
 name = "scratch"
-version = "1.0.4"
+version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5d5e082f6ea090deaf0e6dd04b68360fd5cddb152af6ce8927c9d25db299f98c"
+checksum = "1792db035ce95be60c3f8853017b3999209281c24e2ba5bc8e59bf97a0c590c1"
 
 [[package]]
 name = "security-framework"
@@ -2718,9 +2718,9 @@ dependencies = [
 
 [[package]]
 name = "serde_repr"
-version = "0.1.10"
+version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a5ec9fa74a20ebbe5d9ac23dac1fc96ba0ecfe9f50f2843b52e537b10fbcb4e"
+checksum = "395627de918015623b32e7669714206363a7fc00382bf477e72c1f7533e8eafc"
 dependencies = [
  "proc-macro2",
  "quote",
