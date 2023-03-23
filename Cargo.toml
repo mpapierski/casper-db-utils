@@ -13,10 +13,14 @@ license = "Apache-2.0"
 [dependencies]
 anyhow = "1"
 bincode = "1"
-casper-execution-engine = "2"
-casper-hashing = "1"
-casper-node = "1"
-casper-types = "1"
+casper-execution-engine = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-commit-purge" }
+casper-hashing = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-commit-purge" }
+casper-node = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-commit-purge" }
+casper-types = { git = "https://github.com/mpapierski/casper-node", branch = "gh-3710-commit-purge" }
+#casper-execution-engine = { path = "../casperlabs-node/execution_engine" }
+#casper-hashing = { path = "../casperlabs-node/hashing" }
+#casper-node = { path = "../casperlabs-node/node" }
+#casper-types = { path = "../casperlabs-node/types" }
 clap = { version = "3", features = ["cargo"] }
 futures = "0.3.21"
 lmdb = "0.8.0"
