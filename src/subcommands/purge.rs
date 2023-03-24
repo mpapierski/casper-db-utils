@@ -12,7 +12,7 @@ use casper_hashing::Digest;
 use casper_types::{EraId, Key};
 use clap::{Arg, ArgMatches, Command};
 
-use crate::common::execution_engine::create_lmdb_environment;
+use crate::common::execution_engine::{create_lmdb_environment, DEFAULT_MAX_READERS};
 
 pub const COMMAND_NAME: &str = "purge";
 const DB_PATH: &str = "file-path";
@@ -61,7 +61,7 @@ pub fn run(matches: &ArgMatches) -> bool {
     let mut state_root_hash = Digest::from_hex(state_root_hash).unwrap();
     let latest_era: u64 = matches.value_of("latest-era").unwrap().parse().unwrap();
     let batch_size: usize = matches.value_of("batch-size").unwrap().parse().unwrap();
-    let lmdb_environment = create_lmdb_environment(&db_path, DEFAULT_MAX_DB_SIZE, true)
+    let lmdb_environment = create_lmdb_environment(&db_path, DEFAULT_MAX_DB_SIZE, DEFAULT_MAX_READERS, true)
         .expect("create lmdb environment");
 
     let lmdb_trie_store = Arc::new(LmdbTrieStore::open(&lmdb_environment, None).unwrap());

@@ -11,12 +11,13 @@ pub const DEFAULT_MAX_READERS: u32 = 5;
 pub fn create_lmdb_environment(
     lmdb_path: impl AsRef<Path>,
     default_max_db_size: usize,
+    max_readers: u32,
     manual_sync_enabled: bool,
 ) -> anyhow::Result<Arc<LmdbEnvironment>> {
     let lmdb_environment = Arc::new(LmdbEnvironment::new(
         &lmdb_path,
         default_max_db_size,
-        DEFAULT_MAX_READERS,
+        max_readers,
         manual_sync_enabled,
     )?);
     Ok(lmdb_environment)

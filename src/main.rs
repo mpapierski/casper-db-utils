@@ -9,7 +9,7 @@ use std::{fs::OpenOptions, process};
 use clap::{crate_description, crate_version, Arg, Command};
 use log::error;
 
-use subcommands::{archive, check, latest_block_summary, purge, trie_compact, unsparse};
+use subcommands::{archive, check, latest_block_summary, purge, trie_compact::{self, analyse}, unsparse};
 
 const LOGGING: &str = "logging";
 
@@ -20,6 +20,7 @@ enum DisplayOrder {
     TrieCompact,
     Unsparse,
     Purge,
+    Analyse,
 }
 
 fn cli() -> Command<'static> {
@@ -35,6 +36,7 @@ fn cli() -> Command<'static> {
         .subcommand(trie_compact::command(DisplayOrder::TrieCompact as usize))
         .subcommand(unsparse::command(DisplayOrder::Unsparse as usize))
         .subcommand(purge::command(DisplayOrder::Purge as usize))
+        .subcommand(analyse::command(DisplayOrder::Analyse as usize))
         .arg(
             Arg::new(LOGGING)
                 .short('l')
@@ -74,6 +76,7 @@ fn main() {
         trie_compact::COMMAND_NAME => trie_compact::run(matches),
         unsparse::COMMAND_NAME => unsparse::run(matches),
         purge::COMMAND_NAME => purge::run(matches),
+        analyse::COMMAND_NAME => analyse::run(matches),
         _ => unreachable!("{} should be handled above", subcommand_name),
     };
 

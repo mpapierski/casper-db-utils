@@ -5,6 +5,7 @@ mod tests;
 // All code in the `utils` mod was copied from `casper-node` because it isn't available in the
 // public interface.
 mod utils;
+pub mod analyse;
 
 use clap::{Arg, ArgMatches, Command};
 use log::error;
