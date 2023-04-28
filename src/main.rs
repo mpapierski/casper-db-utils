@@ -9,7 +9,7 @@ use std::{fs::OpenOptions, process};
 use clap::{crate_description, crate_version, Arg, Command};
 use log::error;
 
-use subcommands::{archive, check, latest_block_summary, purge, trie_compact::{self, analyse}, unsparse};
+use subcommands::{archive,  unsparse, migrate};
 
 const LOGGING: &str = "logging";
 
@@ -29,14 +29,15 @@ fn cli() -> Command<'static> {
         .about(crate_description!())
         .arg_required_else_help(true)
         .subcommand(archive::command(DisplayOrder::Archive as usize))
-        .subcommand(check::command(DisplayOrder::Check as usize))
-        .subcommand(latest_block_summary::command(
-            DisplayOrder::LatestBlock as usize,
-        ))
-        .subcommand(trie_compact::command(DisplayOrder::TrieCompact as usize))
+        // .subcommand(check::command(DisplayOrder::Check as usize))
+        // .subcommand(latest_block_summary::command(
+            // DisplayOrder::LatestBlock as usize,
+        // ))
+        // .subcommand(trie_compact::command(DisplayOrder::TrieCompact as usize))
         .subcommand(unsparse::command(DisplayOrder::Unsparse as usize))
-        .subcommand(purge::command(DisplayOrder::Purge as usize))
-        .subcommand(analyse::command(DisplayOrder::Analyse as usize))
+        // .subcommand(purge::command(DisplayOrder::Purge as usize))
+        .subcommand(migrate::command(DisplayOrder::Purge as usize))
+        // .subcommand(analyse::command(DisplayOrder::Analyse as usize))
         .arg(
             Arg::new(LOGGING)
                 .short('l')
@@ -71,12 +72,13 @@ fn main() {
 
     let succeeded = match subcommand_name {
         archive::COMMAND_NAME => archive::run(matches),
-        check::COMMAND_NAME => check::run(matches),
-        latest_block_summary::COMMAND_NAME => latest_block_summary::run(matches),
-        trie_compact::COMMAND_NAME => trie_compact::run(matches),
+        // check::COMMAND_NAME => check::run(matches),
+        // latest_block_summary::COMMAND_NAME => latest_block_summary::run(matches),
+        // trie_compact::COMMAND_NAME => trie_compact::run(matches),
         unsparse::COMMAND_NAME => unsparse::run(matches),
-        purge::COMMAND_NAME => purge::run(matches),
-        analyse::COMMAND_NAME => analyse::run(matches),
+        // purge::COMMAND_NAME => purge::run(matches),
+        migrate::COMMAND_NAME => migrate::run(matches),
+        // analyse::COMMAND_NAME => analyse::run(matches),
         _ => unreachable!("{} should be handled above", subcommand_name),
     };
 

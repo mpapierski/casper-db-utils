@@ -5,7 +5,7 @@ mod block_metadata_db;
 mod deploy_hashes_db;
 mod deploy_metadata_db;
 mod deploys_db;
-mod finalized_approvals_db;
+// mod finalized_approvals_db;
 mod proposers_db;
 mod state_store_db;
 #[cfg(test)]
